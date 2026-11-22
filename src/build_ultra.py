@@ -10,6 +10,7 @@ Morph ULTRA：在 12 页 PRO 版基础上继续加码到 24 页 / 20 个演员 /
 import copy
 import html
 import math
+import os
 import re
 import zipfile
 from lxml import etree
@@ -401,6 +402,10 @@ def slide_xml(frame, idx):
 
 
 def main():
+    if not os.path.exists(BASE):
+        from build_base import build_base
+        build_base()
+        print(f"[build_ultra] BASE 不存在，已自动生成基础稿 -> {BASE}")
     zin = zipfile.ZipFile(BASE)
     items = [(i, zin.read(i.filename)) for i in zin.infolist()]
     orig = dict((i.filename, d) for i, d in items)

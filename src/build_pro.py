@@ -12,6 +12,7 @@ Morph PRO：在 9 页基础上扩到 12 页，加入 6 种进阶平滑效果。
 """
 import copy
 import html
+import os
 import re
 import zipfile
 from lxml import etree
@@ -399,7 +400,16 @@ def slide_xml(frame, idx):
     return ('<?xml version="1.0" encoding="UTF-8"?>' + root).encode("utf-8")
 
 
+def ensure_base():
+    """无外部 BASE 时，用 build_base 从零生成基础稿（agent 即开即用）。"""
+    if not os.path.exists(BASE):
+        from build_base import build_base
+        build_base()
+        print(f"[build_pro] BASE 不存在，已自动生成基础稿 -> {BASE}")
+
+
 def main():
+    ensure_base()
     zin = zipfile.ZipFile(BASE)
     items = [(i, zin.read(i.filename)) for i in zin.infolist()]
     orig = dict((i.filename, d) for i, d in items)

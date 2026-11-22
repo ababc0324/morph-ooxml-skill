@@ -1,0 +1,24 @@
+# 二进制 / 示例交付物（仓库只保留纯文本资产，见 README）
+*.pptx
+*.ppt
+*.docx
+*.xlsx
+*.zip
+*.7z
+*.rar
+
+# 演示 / BASE 源文件（build_*.py 读取，不入库）
+平滑切换演示_Morph版.pptx
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 编辑器 / 系统
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
